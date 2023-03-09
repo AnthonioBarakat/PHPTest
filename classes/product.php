@@ -40,7 +40,6 @@ abstract class Product
         $this->name = $name;
         $this->price = $price;
         Product::$NbOfProducts += 1;
-        
     }
 
     public static function getNbOfProducts()

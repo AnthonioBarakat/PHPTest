@@ -17,26 +17,33 @@ require_once dirname(__FILE__) . '/furniture.php';
  * @version  1.0.0
  * @link
  */
-interface ProductFactory {
+interface ProductFactory
+{
     public function createProduct($sku, $name, $price, $attributes);
 }
 
-class DVDFactory implements ProductFactory {
-    public function createProduct($sku, $name, $price, $attributes) {
+class DVDFactory implements ProductFactory
+{
+    public function createProduct($sku, $name, $price, $attributes)
+    {
         $size = $attributes['size'];
         return new DVD($sku, $name, $price, $size);
     }
 }
 
-class BookFactory implements ProductFactory {
-    public function createProduct($sku, $name, $price, $attributes) {
+class BookFactory implements ProductFactory
+{
+    public function createProduct($sku, $name, $price, $attributes)
+    {
         $weight = $attributes['weight'];
         return new Book($sku, $name, $price, $weight);
     }
 }
 
-class FurnitureFactory implements ProductFactory {
-    public function createProduct($sku, $name, $price, $attributes) {
+class FurnitureFactory implements ProductFactory
+{
+    public function createProduct($sku, $name, $price, $attributes)
+    {
         $height = $attributes['height'];
         $width = $attributes['width'];
         $length = $attributes['length'];

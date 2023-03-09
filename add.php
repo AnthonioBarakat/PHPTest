@@ -44,26 +44,21 @@ function checkIsset()
 
 function getAttribute()
 {
-    if (isset($_POST['size']) && !empty($_POST['size']))
-    {
+    if (isset($_POST['size']) && !empty($_POST['size'])) {
         return array('size' => $_POST['size']);
-    }
-    elseif (isset($_POST['weight']) && !empty($_POST['weight']))
-    {
+    } elseif (isset($_POST['weight']) && !empty($_POST['weight'])) {
         return array('weight' => $_POST['weight']);
-    }
-    elseif (
-        isset($_POST['height']) && !empty($_POST['height']) 
+    } elseif (
+        isset($_POST['height']) && !empty($_POST['height'])
         && isset($_POST['width']) && !empty($_POST['width'])
         && isset($_POST['length']) && !empty($_POST['length'])
-        )
-        {
+    ) {
             return array(
                 'height' => $_POST['height'],
                 'width' => $_POST['width'],
                 'length' => $_POST['length']
             );
-        }
+    }
 }
 
 
@@ -72,18 +67,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and checkIsset()) {
     $p_sku = $_POST['p_sku'];
     $p_name = $_POST['p_name'];
     $p_price = $_POST['p_price'];
-    
+
     $type = $_POST['type'];
-    
-    
-    
+
+
+
     $factories = array(
         'DVD' => new DVDFactory(),
         'BOOK' => new BookFactory(),
         'FURNITURE' => new FurnitureFactory(),
     );
 
-    
+
     /* Check if special attribute is set
     to decide what is the product type  */
     $attributes = getAttribute();
@@ -91,15 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and checkIsset()) {
     $p_type = $factories[$type];
     $new_p = $p_type->createProduct($p_sku, $p_name, $p_price, $attributes);
     $message = $new_p->save();
-    if ($message == 0)
-    {
+    if ($message == 0) {
         echo "
         <script>
         alert('Product SKU already exist');
         window.location.href = 'index.php';
         </script>";
-    }
-    else {
+    } else {
         header("Location: index.php");
     }
 }

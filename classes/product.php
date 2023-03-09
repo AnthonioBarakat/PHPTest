@@ -35,12 +35,12 @@ abstract class Product
      */
     public function __construct($sku, $name, $price)
     {
-        if ($this->validateData($sku, $name, $price)) {
-            $this->sku = $sku;
-            $this->name = $name;
-            $this->price = $price;
-            Product::$NbOfProducts += 1;
-        }
+        $this->validateData($name, $price);
+        $this->sku = $sku;
+        $this->name = $name;
+        $this->price = $price;
+        Product::$NbOfProducts += 1;
+        
     }
 
     public static function getNbOfProducts()
@@ -53,16 +53,13 @@ abstract class Product
     /**
      * Validates the SKU, name, and price data
      *
-     * @param  string $sku   SKU of the product
      * @param  string $name  Name of the product
      * @param  float  $price Price of the product
-     * @return bool Returns true if the data is valid, false otherwise
      */
-    protected function validateData($sku, $name, $price): bool
+    protected function validateData($name, $price)
     {
         $name = filter_var($name, 513);
         $price = filter_var($price, 520);
-        return strlen($sku) == 9 || strlen($sku) == 8;
     }
 
     /**
@@ -82,20 +79,7 @@ abstract class Product
             $typeId,
             ...$typeValue
         );
-        switch ($opStatus) {
-            case 0:
-                return "Product already exists";
-            break;
-            case 1:
-                return "Product Added successfully";
-            break;
-            case 2:
-                return "There is an error in query execution";
-            break;
-            case 3:
-                return "There is an error in create the json att";
-            break;
-        }
+        return $opStatus;
     }
 
     /**

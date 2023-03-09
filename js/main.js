@@ -102,12 +102,6 @@ function validateForm()
         return false;
     }
 
-    if (!/^[A-z0-9]+$/.test(sku) || (sku.length != 8 && sku.length != 9))
-    {
-        pre();
-        document.getElementById('view2').innerHTML = notify("SKU", "SKU must consist of letters and/or numbers with 8 or 9 charachters");
-        return false;
-    }
     else if (!/^[A-z\s]+$/.test(name) || name.length < 4 || name.length > 100)
     {
         pre();
